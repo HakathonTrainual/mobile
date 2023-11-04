@@ -10,7 +10,7 @@ Future<void> main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
-      GlobalBindings().initialize();
+      await GlobalBindings().initialize();
 
       runApp(const MyApp());
     },
