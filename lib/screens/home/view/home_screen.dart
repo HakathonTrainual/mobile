@@ -43,30 +43,3 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 }
-
-/*
-BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            elevation: 0,
-            type: BottomNavigationBarType.fixed,
-            iconSize: 28,
-            selectedFontSize: 10,
-            unselectedFontSize: 10,
-            backgroundColor: AppColors.gray50,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.gray500,
-            currentIndex: controller.currentIndex,
-            onTap: controller.onChangeIndex,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.quiz_outlined, size: 28),
-                label: 'Calls',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline, size: 28),
-                label: 'Profile',
-              ),
-            ],
-          ),
- */

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hackathon_trainual_mobile/resources/color_styles.dart';
+import 'package:hackathon_trainual_mobile/resources/text_styles.dart';
 
 class NavButton extends StatelessWidget {
-  final IconData icon;
+  final String iconUrl;
   final String name;
   final bool isSelected;
   final VoidCallback onTap;
 
   const NavButton({
     super.key,
-    required this.icon,
+    required this.iconUrl,
     required this.name,
     required this.isSelected,
     required this.onTap,
@@ -28,8 +30,10 @@ class NavButton extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Icon(
-                  icon,
+                child: SvgPicture.asset(
+                  iconUrl,
+                  width: 24,
+                  height: 24,
                   color: isSelected
                       ? AppColors.textPrimaryWhite
                       : AppColors.textSecondaryGray,
@@ -38,7 +42,8 @@ class NavButton extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 name,
-                style: TextStyle(
+                style: AppTextStyle.regular.copyWith(
+                  fontSize: 13,
                   color: isSelected
                       ? AppColors.textPrimaryWhite
                       : AppColors.textSecondaryGray,

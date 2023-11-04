@@ -30,7 +30,7 @@ class NavBar extends StatelessWidget {
               ),
               child: NavButton(
                 onTap: () => onTap(0),
-                icon: Icons.gamepad,
+                iconUrl: 'assets/images/game.svg',
                 name: 'Game',
                 isSelected: currentIndex == 0 ? true : false,
               ),
@@ -46,7 +46,7 @@ class NavBar extends StatelessWidget {
               ),
               child: NavButton(
                 onTap: () => onTap(1),
-                icon: Icons.person,
+                iconUrl: 'assets/images/person.svg',
                 name: 'Profile',
                 isSelected: currentIndex == 1 ? true : false,
               ),
