@@ -5,6 +5,11 @@ import 'splash_controller.dart';
 class SplashBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(SplashController(cacheProvider: Get.find()));
+    Get.put(
+      SplashController(
+        cacheProvider: Get.find(),
+        userService: Get.find(),
+      ),
+    );
   }
 }
