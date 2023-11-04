@@ -1,0 +1,3 @@
+class GlobalBindings {
+  void initialize() {}
+}
