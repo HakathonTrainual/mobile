@@ -1,22 +1,25 @@
 import 'package:get/get.dart';
 import 'package:hackathon_trainual_mobile/data/providers/cache_provider.dart';
+import 'package:hackathon_trainual_mobile/data/services/user_service.dart';
 import 'package:hackathon_trainual_mobile/screens/auth/sign_up/view/sign_up.dart';
 import 'package:hackathon_trainual_mobile/screens/home/view/home_screen.dart';
 
 class SplashController extends GetxController {
   final CacheProvider _cacheProvider;
+  final UserService _userService;
 
   SplashController({
     required CacheProvider cacheProvider,
-  }) : _cacheProvider = cacheProvider;
+    required UserService userService,
+  })  : _cacheProvider = cacheProvider,
+        _userService = userService;
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
     if (_cacheProvider.isAuthorized) {
-      // Should be as side effect (not part of business logic)
+      await _userService.fetchUser();
       Get.toNamed(HomeScreen.routeName);
     } else {
-      // Should be as side effect (not part of business logic)
       Get.toNamed(SignUpScreen.routeName);
     }
     super.onReady();
