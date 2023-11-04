@@ -11,9 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Hackathon Trainual Mobile',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true),
       enableLog: true,
       themeMode: ThemeMode.light,
       initialBinding: SplashBinding(),
