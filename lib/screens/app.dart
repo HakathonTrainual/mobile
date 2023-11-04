@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       enableLog: true,
       themeMode: ThemeMode.light,
       initialBinding: SplashBinding(),
-      defaultTransition: Transition.cupertino,
+      defaultTransition: Transition.fade,
       popGesture: true,
       initialRoute: SplashScreen.routeName,
       getPages: GetPages.pages,
