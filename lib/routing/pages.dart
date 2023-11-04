@@ -3,6 +3,8 @@ import 'package:hackathon_trainual_mobile/screens/auth/sign_up/controller/sign_u
 import 'package:hackathon_trainual_mobile/screens/auth/sign_up/view/sign_up.dart';
 import 'package:hackathon_trainual_mobile/screens/home/controller/home_binding.dart';
 import 'package:hackathon_trainual_mobile/screens/home/view/home_screen.dart';
+import 'package:hackathon_trainual_mobile/screens/profile/controller/profile_binding.dart';
+import 'package:hackathon_trainual_mobile/screens/quiz/controller/quiz_binding.dart';
 import 'package:hackathon_trainual_mobile/screens/splash/controller/splash_binding.dart';
 import 'package:hackathon_trainual_mobile/screens/splash/view/splash_screen.dart';
 
@@ -15,8 +17,12 @@ class GetPages {
         ),
         GetPage(
           name: HomeScreen.routeName,
-          page: () => const HomeScreen(),
-          binding: HomeBinding(),
+          page: () => HomeScreen(),
+          bindings: [
+            HomeBinding(),
+            QuizBinding(),
+            ProfileBinding(),
+          ],
         ),
         GetPage(
           name: SignUpScreen.routeName,

@@ -12,8 +12,6 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: LoadingAnimationWidget.discreteCircle(
-          secondRingColor: AppColors.secondaryGreen,
-          thirdRingColor: AppColors.secondaryYellow,
           color: AppColors.primary,
           size: 36,
         ),
