@@ -22,13 +22,24 @@ class Quiz {
         question: question,
         images: images ?? this.images,
       );
+
+  factory Quiz.fromJson(Map<String, dynamic> json) {
+    return Quiz(
+      question: json['question'],
+      images: List<ImageQuiz>.from(
+        json['users'].map(
+          (x) => ImageQuiz.fromJson(x),
+        ),
+      ),
+    );
+  }
 }
 
 class ImageQuiz {
-  final String id;
+  final int id;
   final bool answer;
   final Status status;
-  final String image;
+  String image;
 
   ImageQuiz({
     /// When we select image change this value
@@ -52,4 +63,13 @@ class ImageQuiz {
         image: image,
         id: id,
       );
+
+  factory ImageQuiz.fromJson(Map<String, dynamic> json) {
+    return ImageQuiz(
+      status: Status.notSelected,
+      answer: json['status'],
+      image: '',
+      id: json['id'],
+    );
+  }
 }

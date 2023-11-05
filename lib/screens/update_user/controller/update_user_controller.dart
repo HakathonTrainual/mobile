@@ -26,7 +26,7 @@ class UpdateUserController extends GetxController {
     super.onInit();
   }
 
-  void onHobbySelected(int id) {
+  Future<void> onHobbySelected(int id) async {
     final indexOfHobby = _hobbies.value.indexWhere((hobby) => hobby.id == id);
     final copyOfHobbies = [..._hobbies.value];
 
@@ -36,8 +36,10 @@ class UpdateUserController extends GetxController {
     _hobbies.value = copyOfHobbies;
 
     if (copyOfHobbies[indexOfHobby].isSelected) {
-      _apiClient.post('/user_hobbies?hobby_id=$id');
-    } else {}
+      await _apiClient.post(
+        '/user_hobbies?hobby_id=${copyOfHobbies[indexOfHobby].id}',
+      );
+    }
   }
 
   void onSave() {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hackathon_trainual_mobile/resources/color_styles.dart';
 import 'package:hackathon_trainual_mobile/resources/text_styles.dart';
 import 'package:hackathon_trainual_mobile/screens/auth/sign_in/controller/sign_in_controller.dart';
+import 'package:hackathon_trainual_mobile/screens/widgets/common_button.dart';
 
 class SignInScreen extends GetView<SignInController> {
   static const routeName = '/sign-up';
@@ -80,13 +81,11 @@ class SignInScreen extends GetView<SignInController> {
                       ),
                     ),
                     const SizedBox(height: 48.0),
-                    TextButton(
-                      onPressed: controller.onSignInClicked,
-                      child: const Center(
-                        child: Text(
-                          'Sign in',
-                          style: AppTextStyle.bold,
-                        ),
+                    Center(
+                      child: CommonButton.primary(
+                        size: const CommonButtonSizePreset.largeMatchParent(),
+                        text: 'Sign in',
+                        onPressed: controller.onSignInClicked,
                       ),
                     ),
                   ],

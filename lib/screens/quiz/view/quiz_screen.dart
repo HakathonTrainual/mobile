@@ -5,6 +5,7 @@ import 'package:hackathon_trainual_mobile/data/models/quiz.dart';
 import 'package:hackathon_trainual_mobile/resources/color_styles.dart';
 import 'package:hackathon_trainual_mobile/resources/text_styles.dart';
 import 'package:hackathon_trainual_mobile/screens/quiz/controller/quiz_controller.dart';
+import 'package:hackathon_trainual_mobile/screens/widgets/common_button.dart';
 
 class QuizScreen extends GetView<QuizController> {
   const QuizScreen({super.key});
@@ -18,16 +19,9 @@ class QuizScreen extends GetView<QuizController> {
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Game',
-                  style: AppTextStyle.regular.copyWith(
-                    fontSize: 17,
-                    color: AppColors.textPrimaryLicorice,
-                  ),
-                ),
-                const SizedBox(height: 24),
                 Text(
                   'Choose a photo 🫣',
                   style: AppTextStyle.bold.copyWith(
@@ -36,25 +30,31 @@ class QuizScreen extends GetView<QuizController> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Obx(
-                  () => Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: [
-                      ...controller.quiz.images
-                          .map(
-                            (e) => InkWell(
-                              onTap: () => controller.onImageClicked(e.id),
-                              child: _ImageCard(
-                                url: e.image,
-                                status: e.status,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ],
-                  ),
-                ),
+                Obx(() {
+                  if (controller.quiz != null) {
+                    return Obx(
+                      () => Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: [
+                          ...controller.quiz!.images
+                              .map(
+                                (e) => InkWell(
+                                  onTap: () => controller.onImageClicked(e.id),
+                                  child: _ImageCard(
+                                    url: e.image,
+                                    status: e.status,
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                }),
                 const SizedBox(height: 24),
                 Text(
                   'Question:',
@@ -64,23 +64,32 @@ class QuizScreen extends GetView<QuizController> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  controller.quiz.question,
-                  style: AppTextStyle.regular.copyWith(
-                    fontSize: 17,
-                    color: AppColors.textPrimaryLicorice,
-                  ),
-                ),
                 Obx(() {
-                  if (controller.showNextButton) {
-                    return TextButton(
-                      onPressed: controller.onNextClicked,
-                      child: const Text('Next'),
+                  if (controller.quiz != null) {
+                    return Text(
+                      controller.quiz!.question,
+                      style: AppTextStyle.regular.copyWith(
+                        fontSize: 17,
+                        color: AppColors.textPrimaryLicorice,
+                      ),
                     );
                   } else {
-                    return TextButton(
+                    return const SizedBox();
+                  }
+                }),
+                const SizedBox(height: 24),
+                Obx(() {
+                  if (controller.showNextButton) {
+                    return CommonButton.primary(
+                      size: const CommonButtonSizePreset.largeWrapContent(),
+                      text: 'Next',
+                      onPressed: controller.onNextClicked,
+                    );
+                  } else {
+                    return CommonButton.primary(
+                      size: const CommonButtonSizePreset.largeWrapContent(),
+                      text: 'Send',
                       onPressed: controller.onSendClicked,
-                      child: const Text('Send'),
                     );
                   }
                 }),
@@ -140,12 +149,6 @@ class _ImageCard extends StatelessWidget {
           child: Image.network(
             url,
             fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
             width: MediaQuery.of(context).size.width / 2.3,
             height: MediaQuery.of(context).size.width / 2.3,
           ),

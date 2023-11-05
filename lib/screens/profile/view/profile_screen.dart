@@ -12,147 +12,150 @@ class ProfileScreen extends GetView<ProfileController> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            Text(
-              'Game',
-              style: AppTextStyle.regular.copyWith(
-                fontSize: 17,
-                color: AppColors.textPrimaryLicorice,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Game',
+                style: AppTextStyle.regular.copyWith(
+                  fontSize: 17,
+                  color: AppColors.textPrimaryLicorice,
+                ),
               ),
-            ),
-            const SizedBox(height: 36),
-            Text(
-              'About user',
-              style: AppTextStyle.bold.copyWith(
-                fontSize: 28,
-                color: AppColors.textPrimaryLicorice,
-                fontWeight: FontWeight.w700,
+              const SizedBox(height: 36),
+              Text(
+                'About user',
+                style: AppTextStyle.bold.copyWith(
+                  fontSize: 28,
+                  color: AppColors.textPrimaryLicorice,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Name',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'Name',
+                      style: AppTextStyle.bold.copyWith(
+                        fontSize: 15,
+                        color: AppColors.textPrimaryLicorice,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  TextField(
+                    readOnly: true,
+                    controller: controller.firstNameController,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'Last Name',
+                      style: AppTextStyle.bold.copyWith(
+                        fontSize: 15,
+                        color: AppColors.textPrimaryLicorice,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  TextField(
+                    readOnly: true,
+                    controller: controller.lastNameController,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Your hobbies',
                     style: AppTextStyle.bold.copyWith(
-                      fontSize: 15,
+                      fontSize: 22,
                       color: AppColors.textPrimaryLicorice,
                     ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                TextField(
-                  readOnly: true,
-                  controller: controller.firstNameController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 20.0,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Last Name',
-                    style: AppTextStyle.bold.copyWith(
-                      fontSize: 15,
-                      color: AppColors.textPrimaryLicorice,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                TextField(
-                  readOnly: true,
-                  controller: controller.lastNameController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 20.0,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  'Your hobbies',
-                  style: AppTextStyle.bold.copyWith(
-                    fontSize: 22,
-                    color: AppColors.textPrimaryLicorice,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    ...controller.user.hobbies
-                        .map(
-                          (hobby) => DecoratedBox(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: AppColors.primary,
-                              ),
-                              color: AppColors.primary,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 9),
-                              child: Text(
-                                hobby,
-                                style: AppTextStyle.regular.copyWith(
-                                  fontSize: 17,
-                                  color: AppColors.textPrimaryWhite,
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    alignment: WrapAlignment.start,
+                    children: [
+                      if (controller.user?.hasHobbies ?? false)
+                        ...controller.user!.hobbies
+                            .map(
+                              (hobby) => DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  border: Border.all(
+                                    color: AppColors.primary,
+                                  ),
+                                  color: AppColors.primary,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 9),
+                                  child: Text(
+                                    hobby,
+                                    style: AppTextStyle.regular.copyWith(
+                                      fontSize: 17,
+                                      color: AppColors.textPrimaryWhite,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        )
-                        .toList()
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  'About yourself',
-                  style: AppTextStyle.bold.copyWith(
-                    fontSize: 22,
-                    color: AppColors.textPrimaryLicorice,
+                            )
+                            .toList()
+                    ],
                   ),
-                ),
-                TextField(
-                  readOnly: true,
-                  controller: controller.descController,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 20.0,
-                    ),
-                    hintText: 'Hello! My name is ....',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                  const SizedBox(height: 24),
+                  Text(
+                    'About yourself',
+                    style: AppTextStyle.bold.copyWith(
+                      fontSize: 22,
+                      color: AppColors.textPrimaryLicorice,
                     ),
                   ),
-                  minLines: 5,
-                  maxLines: 8,
-                ),
-                TextButton(
-                  onPressed: controller.onLogOutClicked,
-                  child: const Text('Log Out'),
-                ),
-              ],
-            ),
-          ],
+                  TextField(
+                    readOnly: true,
+                    controller: controller.descController,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20.0,
+                      ),
+                      hintText: 'Hello! My name is ....',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    minLines: 5,
+                    maxLines: 8,
+                  ),
+                  TextButton(
+                    onPressed: controller.onLogOutClicked,
+                    child: const Text('Log Out'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

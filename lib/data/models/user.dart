@@ -28,4 +28,22 @@ class User {
       hobbies: json['hobby_names'] ?? [],
     );
   }
+
+  User copyWith({
+    int? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? description,
+    List<dynamic>? hobbies,
+  }) {
+    return User(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      description: description ?? this.description,
+      hobbies: hobbies ?? this.hobbies,
+    );
+  }
 }

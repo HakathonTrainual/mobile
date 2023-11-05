@@ -28,7 +28,7 @@ class UserService extends GetxController {
 
   late final Dio _authClient = Dio(_initBaseOptions);
 
-  User? user;
+  var user;
 
   Future<void> signIn(String email, String password) async {
     try {
@@ -41,6 +41,7 @@ class UserService extends GetxController {
       );
 
       final loginResponse = LoginResponse.fromJson(result.data);
+
       await _cacheProvider.setAccessToken(loginResponse.token);
       user = loginResponse.user;
     } catch (e) {

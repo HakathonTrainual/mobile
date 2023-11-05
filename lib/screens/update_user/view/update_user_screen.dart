@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hackathon_trainual_mobile/resources/color_styles.dart';
 import 'package:hackathon_trainual_mobile/resources/text_styles.dart';
 import 'package:hackathon_trainual_mobile/screens/update_user/controller/update_user_controller.dart';
+import 'package:hackathon_trainual_mobile/screens/widgets/common_button.dart';
 
 class UpdateUserScreen extends GetView<UpdateUserController> {
   static const routeName = '/update-user';
@@ -81,9 +82,10 @@ class UpdateUserScreen extends GetView<UpdateUserController> {
                   maxLines: 8,
                 ),
                 const SizedBox(height: 24),
-                TextButton(
+                CommonButton.primary(
+                  size: const CommonButtonSizePreset.largeMatchParent(),
+                  text: 'Save',
                   onPressed: controller.onSave,
-                  child: const Text('Save'),
                 ),
               ],
             ),

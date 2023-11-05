@@ -11,7 +11,8 @@ class ProfileController extends GetxController {
   ProfileController({required UserService userService})
       : _userService = userService;
 
-  User get user => _userService.user!;
+  User? get user => _userService.user;
+
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final descController = TextEditingController();
@@ -19,9 +20,9 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    firstNameController.text = user.firstName;
-    lastNameController.text = user.lastName;
-    descController.text = user.description;
+    firstNameController.text = user?.firstName ?? '';
+    lastNameController.text = user?.lastName ?? '';
+    descController.text = user?.description ?? '';
   }
 
   Future<void> onLogOutClicked() async {
