@@ -11,8 +11,8 @@ class User {
     required this.email,
   });
 
-  bool get hasHobbies => false;
-  bool get hasDescription => false;
+  bool get hasHobbies => true;
+  bool get hasDescription => true;
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
