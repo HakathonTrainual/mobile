@@ -11,6 +11,9 @@ class User {
     required this.email,
   });
 
+  bool get hasHobbies => false;
+  bool get hasDescription => false;
+
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
