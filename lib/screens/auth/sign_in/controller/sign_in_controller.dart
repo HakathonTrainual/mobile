@@ -25,7 +25,7 @@ class SignInController extends GetxController {
       _password.value,
     );
 
-    if (!_userService.user.hasDescription && !_userService.user.hasHobbies) {
+    if (!_userService.user!.hasDescription || !_userService.user!.hasHobbies) {
       Get.offAndToNamed(UpdateUserScreen.routeName);
     } else {
       Get.offAndToNamed(HomeScreen.routeName);

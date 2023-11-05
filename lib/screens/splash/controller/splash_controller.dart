@@ -20,7 +20,8 @@ class SplashController extends GetxController {
     if (_cacheProvider.isAuthorized) {
       await _userService.fetchUser();
 
-      if (!_userService.user.hasHobbies && !_userService.user.hasDescription) {
+      if (!_userService.user!.hasHobbies ||
+          !_userService.user!.hasDescription) {
         Get.toNamed(UpdateUserScreen.routeName);
       } else {
         Get.toNamed(HomeScreen.routeName);

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hackathon_trainual_mobile/data/api/api_client.dart';
 import 'package:hackathon_trainual_mobile/data/models/hobbie.dart';
 import 'package:hackathon_trainual_mobile/data/services/user_service.dart';
+import 'package:hackathon_trainual_mobile/screens/home/view/home_screen.dart';
 
 class UpdateUserController extends GetxController {
   final ApiClient _apiClient;
@@ -14,24 +16,12 @@ class UpdateUserController extends GetxController {
         _apiClient = apiClient;
 
   final Rx<List<Hobby>> _hobbies = Rx([]);
-
   List<Hobby> get hobbies => _hobbies.value;
+
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   void onInit() {
-    // _hobbies.value = _userService.user.hobbies;
-    _hobbies.value = [
-      Hobby(name: 'Jogging', id: 1),
-      Hobby(name: 'Running', id: 2),
-      Hobby(name: 'Swimming', id: 3),
-      Hobby(name: 'Yoga', id: 4),
-      Hobby(name: 'Cooking', id: 5),
-      Hobby(name: 'Reading', id: 6),
-      Hobby(name: 'Gardening', id: 7),
-      Hobby(name: 'Painting', id: 8),
-      Hobby(name: 'Dancing', id: 9),
-    ];
-
     getHobbies();
     super.onInit();
   }
@@ -44,13 +34,32 @@ class UpdateUserController extends GetxController {
         .copyWith(isSelected: !copyOfHobbies[indexOfHobby].isSelected);
 
     _hobbies.value = copyOfHobbies;
+
+    if (copyOfHobbies[indexOfHobby].isSelected) {
+      _apiClient.post('/user_hobbies?hobby_id=$id');
+    } else {}
   }
 
-  Future<void> updateUser() async {}
+  void onSave() {
+    updateDescription();
+    Get.offAndToNamed(HomeScreen.routeName);
+  }
+
+  Future<void> updateDescription() async {
+    if (descriptionController.text.isEmpty) return;
+
+    final a = await _apiClient.put(
+      '/users',
+      requestBody: {
+        'description': descriptionController.text,
+      },
+    );
+  }
 
   Future<void> getHobbies() async {
     final response = await _apiClient.getList('/hobbies');
 
-    print(response);
+    _hobbies.value =
+        (response.data as List).map((e) => Hobby.fromJson(e)).toList();
   }
 }

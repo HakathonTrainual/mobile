@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hackathon_trainual_mobile/data/services/user_service.dart';
 import 'package:hackathon_trainual_mobile/screens/home/widgets/nav_button.dart';
 
 class NavBar extends StatelessWidget {
@@ -45,7 +47,9 @@ class NavBar extends StatelessWidget {
                 left: 1,
               ),
               child: NavButton(
-                onTap: () => onTap(1),
+                onTap: () {
+                  Get.find<UserService>().fetchUser().then((_) => onTap(1));
+                },
                 iconUrl: 'assets/images/person.svg',
                 name: 'Profile',
                 isSelected: currentIndex == 1 ? true : false,

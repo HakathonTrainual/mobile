@@ -66,7 +66,7 @@ class UpdateUserScreen extends GetView<UpdateUserController> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
-                  onChanged: (_) {},
+                  controller: controller.descriptionController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 10.0,
@@ -82,7 +82,7 @@ class UpdateUserScreen extends GetView<UpdateUserController> {
                 ),
                 const SizedBox(height: 24),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: controller.onSave,
                   child: const Text('Save'),
                 ),
               ],

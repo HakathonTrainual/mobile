@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hackathon_trainual_mobile/data/api/api_client.dart';
 import 'package:hackathon_trainual_mobile/data/models/login.dart';
 import 'package:hackathon_trainual_mobile/data/models/user.dart';
 import 'package:hackathon_trainual_mobile/data/providers/cache_provider.dart';
 import 'package:hackathon_trainual_mobile/data/providers/env_prodiver.dart';
 
-class UserService {
+class UserService extends GetxController {
   final EnvironmentProvider _envProvider;
   final ApiClient _apiClient;
   final CacheProvider _cacheProvider;
@@ -27,7 +28,7 @@ class UserService {
 
   late final Dio _authClient = Dio(_initBaseOptions);
 
-  late final User user;
+  User? user;
 
   Future<void> signIn(String email, String password) async {
     try {
